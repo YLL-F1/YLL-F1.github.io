@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="YLL">
   <meta name="keywords" content="">
-  <title>第一篇属于自己的博客 - YLL-F11</title>
+  <title>hexo博客搭建 - YLL-F11</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -160,7 +160,7 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-08-05 15:06" pubdate>
+    <time datetime="2020-08-05 16:16" pubdate>
       2020年8月5日 下午
     </time>
   </div>
@@ -171,7 +171,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      212 字
+      363 字
     </span>
   
 
@@ -181,7 +181,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      2
+      4
        分钟
     </span>
   
@@ -211,12 +211,24 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">第一篇属于自己的博客</h1>
+            <h1 style="display: none">hexo博客搭建</h1>
             
             <div class="markdown-body" id="post-body">
-              <h2 id="序"><a href="#序" class="headerlink" title="序"></a>序</h2><p>  之前一直在第三方记录生活与工作所碰到的故事，但是由于种种原因，第三方所提供的服务总是出现问题。</p>
-<h2 id="example"><a href="#example" class="headerlink" title="example:"></a><em>example:</em></h2><p>  服务器正在维护中，您的文章目前处于维护状态，您的的文章目前处于审核状态。。。。。  所以，我找了大量的博客搭建资料。发现github原来是一个相当不错的博客搭建平台，既不需要购买VPS，也不需要购买域名，并且又方便转移。</p>
-<h4 id="自律"><a href="#自律" class="headerlink" title="自律"></a>自律</h4><p>当然写博客也是为了提供自己的自律性。因为好多时候总是把时间浪费在联盟、网站、抖音等等上，感觉有那么一点点荒废（哈哈）。所以我要每周进行一篇博客更新，内容不限（技术、生活、运动）。</p>
+              <h2 id="安装流程（windows环境）"><a href="#安装流程（windows环境）" class="headerlink" title="安装流程（windows环境）"></a>安装流程（windows环境）</h2><h3 id="node-js安装"><a href="#node-js安装" class="headerlink" title="node.js安装"></a>node.js安装</h3><p>官网下载node.exe并安装<br><img src="/images/2020-8-5/node.png" srcset="/img/loading.gif"></p>
+<h3 id="安装Git-→-安装Hexo"><a href="#安装Git-→-安装Hexo" class="headerlink" title="安装Git → 安装Hexo"></a>安装Git → 安装Hexo</h3><p>官网下载git.exe并安装<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/index.html">(安装教程)</a><br>打开 git bash 输入以下命令</p>
+<hr>
+<p><code>npm install -g hexo-cli</code><br>Hexo 完成后，请特别的注意看注释。<br>hexo init <folder>  folder指我们要安装的博客根目录<br><code>hexo init blog</code> #指的是在当前文件夹下新建blog目录作为博客的根目录<br><code>cd</code><br><code>npm install</code>  安装所有的依赖包<br><code>hexo server</code></p>
+<hr>
+<p><img src="/images/2020-8-5/hexo-s.png" srcset="/img/loading.gif"><br><img src="/images/2020-8-5/index.png" srcset="/img/loading.gif"></p>
+<h3 id="主题更换"><a href="#主题更换" class="headerlink" title="主题更换"></a>主题更换</h3><p>hexo支持自由更换主题，并且当更换主题是内容不变（适合喜新厌旧的小伙伴）。我使用的主题是hexo-theme-fluid<a target="_blank" rel="noopener" href="https://fluid-dev.github.io/hexo-fluid-docs/guide/">(使用文档)</a><br>将主题拷贝到站点的themes目录下<br><code>git clone https://github.com/fluid-dev/hexo-theme-fluid.git themes/</code><br>同时修改<code>_config.yml</code>中theme字段为<code>hexo-theme-fluid</code><br><code>hexo clean</code><br><code>hexo server</code><br><img src="/images/2020-8-5/fulid.png" srcset="/img/loading.gif">  </p>
+<h2 id="Github托管"><a href="#Github托管" class="headerlink" title="Github托管"></a>Github托管</h2><h3 id="注册GitHub账号"><a href="#注册GitHub账号" class="headerlink" title="注册GitHub账号"></a>注册GitHub账号</h3><p>在Github官网注册账号，这样我们便拥有的发布的授权。github有许多的功能，发布blog也是我最近才发现的，当然我也正在尝试挖掘其他有趣的function。  </p>
+<h3 id="创建repository"><a href="#创建repository" class="headerlink" title="创建repository"></a>创建repository</h3><p><img src="/images/2020-8-5/github.png" srcset="/img/loading.gif"></p>
+<h3 id="设置ssh连接"><a href="#设置ssh连接" class="headerlink" title="设置ssh连接"></a>设置ssh连接</h3><p>设置 SSH 远程连接设置Git的user name和email<br><code>git config --global user.name &quot;xxx&quot;</code><br><code>git config --global user.email &quot;xxx@qq.com&quot;</code><br>本地生成密钥<br><code>ssh-keygen -t rsa -C &quot;xxx@qq.com&quot;</code><br>将生成的<code>id_rsa.pub</code>内容粘贴到github上。<br><img src="/images/2020-8-5/ssh-key.png" srcset="/img/loading.gif"></p>
+<h3 id="发布到Github"><a href="#发布到Github" class="headerlink" title="发布到Github"></a>发布到Github</h3><p>在博客的配置文件中_config.yml 中 末尾添加Deploy</p>
+<pre><code class="deploy:">  type: git
+  repo:
+    github: git@github.com:xxx/xxx.github.io.git,master</code></pre>
+<p>###</p>
 
             </div>
             <hr>
@@ -233,18 +245,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/08/05/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">hexo博客搭建</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/08/04/hello-world/">
-                        <span class="hidden-mobile">Hello World</span>
+                      <a href="/2020/08/05/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%B1%9E%E4%BA%8E%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/">
+                        <span class="hidden-mobile">第一篇属于自己的博客</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -383,7 +389,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "第一篇属于自己的博客&nbsp;",
+        "hexo博客搭建&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
