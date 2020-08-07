@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title>流量混淆webshell</title>
+    <link href="/2020/08/06/%E6%B5%81%E9%87%8F%E6%B7%B7%E6%B7%86webshell/"/>
+    <url>/2020/08/06/%E6%B5%81%E9%87%8F%E6%B7%B7%E6%B7%86webshell/</url>
+    
+    <content type="html"><![CDATA[<h2 id="webshell是什么？"><a href="#webshell是什么？" class="headerlink" title="webshell是什么？"></a>webshell是什么？</h2><p>刚刚接触安全的时候，对于webshell这个概念还是十分的惊奇。只记得当时带课的老师才测试网站上传了一个php文件（老师说是webshell），然后用了一个软件就直接可以控制测试网站了。当时觉的真TM的牛皮，那时起觉的安全还挺有意思的。  </p><h3 id="回忆复现"><a href="#回忆复现" class="headerlink" title="回忆复现"></a>回忆复现</h3><p><font size=1 color=Blue><em>到底websehll是什么？那就来回忆下当前的情景。</em></font><br>工具: phpstudy、菜刀、一句话webshell<code>&lt;?php eval(@$_POST[&#39;a&#39;]); ?&gt;</code>。<br>操作流程:    </p><ul><li>将webshell保存为后缀为.php的文件并上传到相应的web目录下。<br><img src="/images/2020-8-6/yijuhua.png">  </li><li>使用中国菜刀进行连接  </li></ul><blockquote><p>中国菜刀 是一款由中国大牛开发的webshell后门管理工具。配置简便、功能强大、使用方便，可以说是一款强大好用的“web管理工具”。</p></blockquote>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>hexo博客搭建</title>
     <link href="/2020/08/05/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
     <url>/2020/08/05/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</url>
@@ -22,19 +35,6 @@
     <url>/2020/08/05/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%B1%9E%E4%BA%8E%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/</url>
     
     <content type="html"><![CDATA[<h2 id="序"><a href="#序" class="headerlink" title="序"></a>序</h2><p>  之前一直在第三方记录生活与工作所碰到的故事，但是由于种种原因，第三方所提供的服务总是出现问题。</p><h2 id="example"><a href="#example" class="headerlink" title="example:"></a><em>example:</em></h2><p>  服务器正在维护中，您的文章目前处于维护状态，您的的文章目前处于审核状态。。。。。  所以，我找了大量的博客搭建资料。发现github原来是一个相当不错的博客搭建平台，既不需要购买VPS，也不需要购买域名，并且又方便转移。</p><h4 id="自律"><a href="#自律" class="headerlink" title="自律"></a>自律</h4><p>当然写博客也是为了提高自己的自律性。因为好多时候总是把时间浪费在LOL、手游、抖音等等上，感觉有那么一点点荒废（哈哈）。所以说想把这些时间用在博客身上，也未必不是一件很有意义的事情。当然我要严格要求自己每周更新一篇文章，内容不限（技术、生活、运动、旅行、风景等），让生活变的更有意义。</p>]]></content>
-    
-    
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="/2020/08/04/hello-world/"/>
-    <url>/2020/08/04/hello-world/</url>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span></code></pre><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre><code class="hljs bash">$ hexo server</code></pre><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre><code class="hljs bash">$ hexo generate</code></pre><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre><code class="hljs bash">$ hexo deploy</code></pre><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
     
     
     
