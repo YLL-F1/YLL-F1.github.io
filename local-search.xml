@@ -8,7 +8,7 @@
     <link href="/2020/08/31/%E6%9F%90X%E6%9C%8D%E5%AE%A1%E8%AE%A1/"/>
     <url>/2020/08/31/%E6%9F%90X%E6%9C%8D%E5%AE%A1%E8%AE%A1/</url>
     
-    <content type="html"><![CDATA[<h2 id="代码审计"><a href="#代码审计" class="headerlink" title="代码审计"></a>代码审计</h2><p>最近hw的举行区间，某服爆出一起神奇的漏洞。那咱就对他的代码分析分析是怎么产生的这个漏洞点。</p><p><img src="/images/edr/1.JPG"></p>]]></content>
+    <content type="html"><![CDATA[<h2 id="代码审计"><a href="#代码审计" class="headerlink" title="代码审计"></a>代码审计</h2><p>最近hw的举行区间，某服爆出一起神奇的漏洞。那咱就对他的代码分析分析是怎么产生的这个漏洞点。</p><p><img src="/images/edr/1.png"></p>]]></content>
     
     
     
