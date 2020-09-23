@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title>简单的Telegram机器人</title>
+    <link href="/2020/09/20/%E7%AE%80%E5%8D%95%E7%9A%84Telegram%E6%9C%BA%E5%99%A8%E4%BA%BA/"/>
+    <url>/2020/09/20/%E7%AE%80%E5%8D%95%E7%9A%84Telegram%E6%9C%BA%E5%99%A8%E4%BA%BA/</url>
+    
+    <content type="html"><![CDATA[<h2 id="Telegram"><a href="#Telegram" class="headerlink" title="Telegram"></a>Telegram</h2><p>闲来无事！！！！，做了一个简单的Telegram BOT!<br>机器人订阅ID<br>@yll1122_bot</p><h3 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h3><p>该机器人目前支持一些简单的加解密功能，还有数字货币买入卖出点的简单计算功能。</p><p><img src="/images/telegram/1.png"></p><h3 id="项目地址"><a href="#项目地址" class="headerlink" title="项目地址"></a>项目地址</h3><p><a href="https://github.com/YLL-F1/telegram_bot">https://github.com/YLL-F1/telegram_bot</a></p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>pwn之ret2text</title>
     <link href="/2020/09/10/pwn%E4%B9%8Bret2text/"/>
     <url>/2020/09/10/pwn%E4%B9%8Bret2text/</url>

