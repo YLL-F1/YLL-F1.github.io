@@ -177,7 +177,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      69 字
+      298 字
     </span>
   
 
@@ -187,12 +187,20 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      3
        分钟
     </span>
   
 
   
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
   
 </div>
 
@@ -220,8 +228,10 @@
             <h1 style="display: none">简单的Telegram机器人</h1>
             
             <div class="markdown-body" id="post-body">
-              <h2 id="Telegram"><a href="#Telegram" class="headerlink" title="Telegram"></a>Telegram</h2><p>闲来无事！！！！，做了一个简单的Telegram BOT!<br>机器人订阅ID<br>@yll1122_bot</p>
-<h3 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h3><p>该机器人目前支持一些简单的加解密功能，还有数字货币买入卖出点的简单计算功能。</p>
+              <h2 id="Telegram"><a href="#Telegram" class="headerlink" title="Telegram"></a>Telegram</h2><p>闲来无事! ! ! !，做了一个简单的Telegram BOT，该机器人目前支持一些简单的加解密功能，还有数字货币买入卖出点的简单计算功能!<br>机器人订阅ID<br>@yll1122_bot</p>
+<h3 id="常规无杠杆计算"><a href="#常规无杠杆计算" class="headerlink" title="常规无杠杆计算"></a>常规无杠杆计算</h3><p>x = 输入的买入币价<br>s = 预计盈利<br>base = 买入总金额</p>
+<p>首先先计算出买入的数量:<br><code>number = base / x</code><br>这样再去计算预计卖出币价y1:<br>预计获利 = (预计卖出币价y1 * 买入数量number) - (当前买入币价x * 买入数量number) - (预计卖出总价*交易手续费)<br><code>s = y1 * number - x * number - y1 * number *0.02(方程)</code><br>预计卖出价(赚s利润):<code>y1 = ((s / number) + x ) / 0.998</code><br>涨跌百分比:<code>n = (y1-x) / x</code><br>预计卖出价(赔s利润):<code>y2 = ((-s / number) + x) / 0.998</code></p>
+<h3 id="逐仓杠杆计算"><a href="#逐仓杠杆计算" class="headerlink" title="逐仓杠杆计算"></a>逐仓杠杆计算</h3><p>在杠杆中存在几个关键的数字，以做空为例，爆仓触发风险率R=110％。卖出价p1，爆仓价p，天数d，杠杆倍数n，本金定为a，借贷T，利息(G)= T * 利率pi(%0.2)。<br>风险率计算公式: R=(本金+借贷-利息)/(借贷)x100%。<br>1.1 = (a+T-G)/T*100%</p>
 <p><img src="/images/telegram/1.png" srcset="/img/loading.gif"></p>
 <h3 id="项目地址"><a href="#项目地址" class="headerlink" title="项目地址"></a>项目地址</h3><p><a target="_blank" rel="noopener" href="https://github.com/YLL-F1/telegram_bot">https://github.com/YLL-F1/telegram_bot</a></p>
 
@@ -384,6 +394,8 @@
   <script  src="/js/clipboard-use.js" ></script>
 
 
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
 
