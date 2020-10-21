@@ -176,6 +176,50 @@
     
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
+        <a href="/2020/10/21/pwn%E4%B9%8Bpwn1/">pwn之pwn1</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/10/21/pwn%E4%B9%8Bpwn1/">
+          
+          
+            
+          
+          PWNBUUCTF 地址
+IDA分析F5 查看伪代码，gets存在溢出漏洞，并且存在system函数。所以只需要计算出偏移量，溢出跳转至system函数。 
+system函数地址0x000000000040118A。 
+手动偏移量计算ida逆向寻找到gets的地址，并在gdb中下断点。 
+输入r运行，计算ESP 到 EBP的偏移量0x7fffffffdde0-(0x7fffffffdde0+1h)
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-10-21 14:58" pubdate>
+              2020-10-21
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AE%89%E5%85%A8/">二进制安全</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
         <a href="/2020/10/09/%E5%8C%97%E6%88%B4%E6%B2%B3%E4%B9%8B%E6%97%85/">北戴河之旅</a>
       </h1>
 
