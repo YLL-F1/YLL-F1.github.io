@@ -177,7 +177,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      632 字
+      619 字
     </span>
   
 
@@ -220,7 +220,7 @@
             <h1 style="display: none">简单的Telegram机器人</h1>
             
             <div class="markdown-body" id="post-body">
-              <h2 id="Telegram"><a href="#Telegram" class="headerlink" title="Telegram"></a>Telegram</h2><p>闲来无事！！！！，做了一个简单的Telegram BOT!<br>闲来无事! ! ! !，做了一个简单的Telegram BOT，该机器人目前支持一些简单的加解密功能，还有数字货币买入卖出点的简单计算功能!<br>机器人订阅ID<br>@yll1122_bot</p>
+              <h2 id="Telegram"><a href="#Telegram" class="headerlink" title="Telegram"></a>Telegram</h2><p>闲来无事! ! ! !，做了一个简单的Telegram BOT，该机器人目前支持一些简单的加解密功能，还有数字货币买入卖出点的简单计算功能!<br>机器人订阅ID<br>@yll1122_bot</p>
 <h3 id="常规无杠杆计算"><a href="#常规无杠杆计算" class="headerlink" title="常规无杠杆计算"></a>常规无杠杆计算</h3><p>输入: 盈利<code>s</code> 输入的买入币价<code>x</code> 买入总金额<code>base</code> </p>
 <p>首先先计算出买入的数量:<br><code>number = base / x</code><br>这样再去计算预计卖出币价y1:<br>预计获利 = (预计卖出币价y1 * 买入数量number) - (当前买入币价x * 买入数量number) - (预计卖出总价<code>买入卖出两次交易手续费</code>*交易手续费率)<br><code>s = y1 * number - x * number - (y1+x) * number *0.002(方程)</code><br>预计卖出价(赚s利润):<code>y1 = (s + 1.002 * x * number) / (0.998  * number)</code><br>涨跌百分比:<code>n = (y1-x) / x</code><br>预计卖出价(赔s利润):<code>y2 = (-s + 1.002 * x * number) / (0.998  * number)</code><br><img src="/images/telegram/2.png" srcset="/img/loading.gif">  </p>
 <h3 id="逐仓杠杆计算-做空"><a href="#逐仓杠杆计算-做空" class="headerlink" title="逐仓杠杆计算(做空)"></a>逐仓杠杆计算(做空)</h3><p>在杠杆中存在几个关键的数字，以做空为例，爆仓触发风险率R=110％。当前买入价x，预计卖出币价y1，爆仓价p，天数day，杠杆倍数n，本金定为base，借币数量number，pi。<br>输入: 盈利<code>s</code> 倍数<code>bei</code> 当前卖出价格<code>x</code> 本金<code>base</code> 天数<code>day</code><br>借币数量: <code>number = (base/x) * bei</code><br>预计获利 = (当前卖出币价x * 借入数量number) - (预计当前买入币价y1 * 借入数量number) - (预计卖出总价<code>买入卖出两次交易手续费</code><em>交易手续费) - (当前买入币价x * 借入数量number * 利率 * 天数)<br>方程 <code>s = (x * number) - (y1 * number) - ((x + y1) * number * 0.002) - (y1 * number * 0.00098 * day)</code><br>预计卖出价(赚s利润): <code>y1 = ((0.998 * number * x) - s) / ((1.002 + (0.00098*day) ) * number * day)</code><br>涨跌百分比: <code>n = (y1-x) / x</code><br>预计卖出价(赔s利润): <code>y2 = ((0.998 * number * x) + s) / ((1.002 + (0.00098*day) ) * number * day)</code><br>风险率计算公式: (担保资产+当前借币金额)/(未来借币金额+未还币息)*100%<br>1.1 = (本金a + 借贷数量t</em>当前卖币价x)/(借贷数量t<em>预计买入价y1+借贷数量t</em>预计买入y1*0.00098) * 100%<br>方程 <code>1.1 = (base + (x * number)) / (y1 * number + (y1 * number *0.00098 * day)) * 100%</code><br><code>y1 * number + (y1 * number *0.00098 * day) = ((base + (x * number)) / 1.1) / (number * (1 + (0.00098 * day))</code><br>爆仓价: <code>y1 = p =  ((base + (x * number)) / 1.1) / (number * (1 + 0.00098 + day))</code><br>风险率: <code>k = (base + (p1 * number)) / (x * number + (x * number * 0.00098 * day))</code><br><img src="/images/telegram/2.png" srcset="/img/loading.gif">  </p>
