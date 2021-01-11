@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title>邮件安全</title>
+    <link href="/2020/12/17/%E9%82%AE%E4%BB%B6%E5%AE%89%E5%85%A8/"/>
+    <url>/2020/12/17/%E9%82%AE%E4%BB%B6%E5%AE%89%E5%85%A8/</url>
+    
+    <content type="html"><![CDATA[<h2 id="序"><a href="#序" class="headerlink" title="序"></a>序</h2><p>email作为工作中常用的沟通工具，所以它的安全问题也是重中之重，现实中这样的案例也屡见不鲜。<br>案例: <code>黑客伪造某员工领导并要求其转账，从而非法咋骗20万人民币</code><br>案例: <code>某一员工点击邮件附件从而导致公司多台笔记本被植入勒索病毒，损失价值高达几百万</code><br>既然有需求，市场必然存在这大量的解决方案与产品。如果你的邮箱系统使用的第三方服务如Tencent、网易、126等等，那直接再其服务中继续添加VIP服务即可，当然价钱就另当别论了。如果你使用的邮箱系统是非第三方服务，那么你考虑的问题就多一些了，下面简单该如何进行邮件系统的防范。</p><h2 id="邮件协议"><a href="#邮件协议" class="headerlink" title="邮件协议"></a>邮件协议</h2><p>邮件协议有三大类分别是SMTP，POP3，IMAP，通常我们发送邮件时使用的是SMTP协议，而收邮件使用pop3和imap协议。<br><img src="/images/email_security/1.png"><br>如果是跨域发邮件，通常都是由服务器代发。如:我们通过qq邮箱给163邮箱进行发送邮件，首先我们先使用smtp协议将邮件发送至qq邮箱服务器，再由qq邮箱服务去发送至163邮箱服务器，最终收件人通过pop3/imap从163邮箱收取邮件。</p><h2 id="IMAP与POP3区别"><a href="#IMAP与POP3区别" class="headerlink" title="IMAP与POP3区别"></a>IMAP与POP3区别</h2><h3 id="POP3介绍"><a href="#POP3介绍" class="headerlink" title="POP3介绍"></a>POP3介绍</h3><p>POP3，全名为“Post Office Protocol - Version 3”，即“邮局协议版本3”。是TCP/IP协议族中的一员，由RFC1939 定义。本协议主要用于支持使用客户端远程管理在服务器上的电子邮件。提供了SSL加密的POP3协议被称为POP3S。POP 协议支持“离线”邮件处理。其具体过程是：邮件发送到服务器上，电子邮件客户端调用邮件客户机程序以连接服务器，并下载所有未阅读的电子邮件。这种离线访问模式是一种存储转发服务，将邮件从邮件服务器端送到个人终端机器上，一般是PC机或 MAC。一旦邮件发送到 PC 机或MAC上，邮件服务器上的邮件将会被删除。但目前的POP3邮件服务器大都可以“只下载邮件，服务器端并不删除”，也就是改进的POP3协议。</p><h3 id="IMAP介绍"><a href="#IMAP介绍" class="headerlink" title="IMAP介绍"></a>IMAP介绍</h3><p>IMAP（Internet Mail Access Protocol，Internet邮件访问协议）以前称作交互邮件访问协议（Interactive Mail Access Protocol）。IMAP是斯坦福大学在1986年开发的一种邮件获取协议。它的主要作用是邮件客户端（例如MS Outlook Express）可以通过这种协议从邮件服务器上获取邮件的信息，下载邮件等。当前的权威定义是RFC3501。IMAP协议运行在TCP/IP协议之上，使用的端口是143。它与POP3协议的主要区别是用户可以不用把所有的邮件全部下载，可以通过客户端直接对服务器上的邮件进行操作。</p><h3 id="IMAP-POP3对比特点"><a href="#IMAP-POP3对比特点" class="headerlink" title="IMAP/POP3对比特点"></a>IMAP/POP3对比特点</h3><p>与POP3协议类似，IMAP（Internet消息访问协议）也是提供面向用户的邮件收取服务。常用的版本是IMAP4。IMAP4改进了POP3的不足，用户可以通过浏览信件头来决定是否收取、删除和检索邮件的特定部分，还可以在服务器上创建或更改文件夹或邮箱。它除了支持POP3协议的脱机操作模式外，还支持联机操作和断连接操作。它为用户提供了有选择的从邮件服务器接收邮件的功能、基于服务器的信息处理功能和共享信箱功能。IMAP4的脱机模式不同于POP3，它不会自动删除在邮件服务器上已取出的邮件，其联机模式和断连接模式也是将邮件服务器作为“远程文件服务器”进行访问，更加灵活方便。IMAP4支持多个邮箱。IMAP4的这些特性非常适合在不同的计算机或终端之间操作邮件的用户（例如你可以在手机、PAD、PC上的邮件代理程序操作同一个邮箱），以及那些同时使用多个邮箱的用户。</p><h2 id="邮件的构成结构"><a href="#邮件的构成结构" class="headerlink" title="邮件的构成结构"></a>邮件的构成结构</h2><p>而这种邮件内容的基本格式和具体细节分别是由 RFC822 文档和 MIME 协议定义的。<br><img src="/images/email_security/2.png"> </p><h3 id="RFC822"><a href="#RFC822" class="headerlink" title="RFC822"></a>RFC822</h3><p>RFC822文档中定义了多个标准的邮件头字段，每一个邮件头字段表示一种特定的信息。邮件头中也可以包含自定义的头字段，这种自定义的头字段通常是某个组织或机构内部专用的。其中包括Received，From，to，subject，cc，bcc等字段，但是它无法定义一些图片，声音，压缩包等二进制的数据。</p><h3 id="MIME"><a href="#MIME" class="headerlink" title="MIME"></a>MIME</h3><p>MIME的全称是”Multipurpose Internet Mail Extensions”，中译为”多用途互联网邮件扩展”，指的是一系列的电子邮件技术规范，主要包括RFC 2045、RFC 2046、RFC 2047、RFC 4288、RFC 4289和RFC 2077。MIME是为了更好的解决复杂邮件体的格式，它可以表达多段平行的文本内容和非文本的邮件内容，例如，在邮件体中内嵌的图像数据和邮件附件等。另外，MIME协议的数据格式也可以避免邮件内容在传输过程中发生信息丢失。MIME协议不是对RFC822邮件格式的升级和替代，而是基于RFC822邮件格式的扩展应用。一言以蔽之，RFC822定义了邮件内容的格式和邮件头字段的详细细节，MIME协议则是定义了如何在邮件体部分表达出的丰富多样的数据内容。</p><h2 id="如何通过SPF-DKIM-DMARC保护邮件安全"><a href="#如何通过SPF-DKIM-DMARC保护邮件安全" class="headerlink" title="如何通过SPF/DKIM/DMARC保护邮件安全"></a>如何通过SPF/DKIM/DMARC保护邮件安全</h2><h3 id="SPF简介"><a href="#SPF简介" class="headerlink" title="SPF简介"></a>SPF简介</h3>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>pwn之pwn1</title>
     <link href="/2020/10/21/pwn%E4%B9%8Bpwn1/"/>
     <url>/2020/10/21/pwn%E4%B9%8Bpwn1/</url>
