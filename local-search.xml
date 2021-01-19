@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title>中间人解密流量会话</title>
+    <link href="/2021/01/11/%E4%B8%AD%E9%97%B4%E4%BA%BA%E8%A7%A3%E5%AF%86%E6%B5%81%E9%87%8F%E4%BC%9A%E8%AF%9D/"/>
+    <url>/2021/01/11/%E4%B8%AD%E9%97%B4%E4%BA%BA%E8%A7%A3%E5%AF%86%E6%B5%81%E9%87%8F%E4%BC%9A%E8%AF%9D/</url>
+    
+    <content type="html"><![CDATA[<h2 id="https加密简介"><a href="#https加密简介" class="headerlink" title="https加密简介"></a>https加密简介</h2><p>传统的http在网络传输中的数据都是以明文进行传输，如果攻击者对网络内容进行监听窃取，我们的通信内容将无疑暴漏。而引入https的作用就是为了防止数据在网络中进行明文传输，从而对传输数据进行加密防止被第三者所获取。就行攻击者截获我们的数据也很难获取我们的真实内容。</p><p><img src="/images/TLS/1.png"> </p><p>https使用了两种加密方式，第一次交使互用的是非对称加密来获取随机数，第二次交互使用随机数进行对称加密传输数据。</p><h2 id="中间人解密简介"><a href="#中间人解密简介" class="headerlink" title="中间人解密简介"></a>中间人解密简介</h2><p><img src="/images/TLS/2.png"></p><p>中间人解密，攻击者为了获得HTTPS传输的明文数据，需要先将自己接入到客户端和目标网站之间；在传输过程中伪造服务器的证书，将服务器的公钥替换成自己的公钥，从而窃取客户端和服务端的通信数据。</p><h2 id="实验操作原理"><a href="#实验操作原理" class="headerlink" title="实验操作原理"></a>实验操作原理</h2><p>准备两台虚机，一台kali(中间人)，一台客户端(windows7)。</p><h3 id="流量转发"><a href="#流量转发" class="headerlink" title="流量转发"></a>流量转发</h3><p>既然是中间人攻击首先要将流量转到中间人的机器上，当然方法有多种nat，arp欺骗，手动绑定网关。这里使用的是手动绑定arp，来进行流量转发。<br>kali: <code>vi /proc/sys/net/ipv4/ip_forward</code> 开启网卡转发0改为1。<br><img src="/images/TLS/3.png"><br>windows7: <code>netsh -c &quot;i i&quot; add neighbors 14 &quot;192.168.40.2&quot; &quot;00-0c-29-2a-db-61&quot;</code> 通过ping kali修改网卡mac地址。<br><img src="/images/TLS/4.png"><br><img src="/images/TLS/5.png"><br>测试访问搜狐ok<br><img src="/images/TLS/6.png"></p><h3 id="sslsplit解密"><a href="#sslsplit解密" class="headerlink" title="sslsplit解密"></a>sslsplit解密</h3><p>kali: <code> openssl genrsa -out ssl_ca.key 2048</code> 使用openssl生成私钥<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>openssl req -new -x509 -days 1096 -key ssl_ca.key -out ca.crt</code> 使用私钥生成证书<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>iptables -t nat -A PREROUTING -p tcp --dport 443 -j REDIRECT --to-ports 8443</code> 使用iptables将443端口流量转到8443</p><p>启动 sslspit: <code> sslsplit -D -l connect.log -j test/ -S test/ -k ssl_ca.key -c ca.crt ssl 0.0.0.0 8443 -X sslspit_1.pcap</code><br><img src="/images/TLS/9.png"><br>windows7 访问 <a href="http://www.sohu.com进行测试,可以看到浏览该证书不安全./">www.sohu.com进行测试，可以看到浏览该证书不安全。</a><br><img src="/images/TLS/7.png"><br><img src="/images/TLS/11.png"><br>访问sslspit生成的pcap文件，可以看到明文的443通信服务。<br><img src="/images/TLS/10.png"></p><p><a href="https://segmentfault.com/a/1190000021494676">参考链接 https://segmentfault.com/a/1190000021494676</a><br><a href="https://github.com/droe/sslsplit/issues/248">参考链接 https://github.com/droe/sslsplit/issues/248</a></p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>邮件安全</title>
     <link href="/2020/12/17/%E9%82%AE%E4%BB%B6%E5%AE%89%E5%85%A8/"/>
     <url>/2020/12/17/%E9%82%AE%E4%BB%B6%E5%AE%89%E5%85%A8/</url>
